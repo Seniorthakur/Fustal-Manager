@@ -25,7 +25,6 @@ export async function updateCourtStatusAction(formData: FormData) {
   await writeAuditLog({ actorId: user.id, actorName: user.name, action: "court.status", entityType: "court", entityId: id, details: JSON.stringify({ status }) });
   revalidatePath("/courts");
   revalidatePath("/schedule");
-  return court;
 }
 
 
