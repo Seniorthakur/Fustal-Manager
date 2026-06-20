@@ -1,0 +1,103 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Admin {
+  id           String    @id
+  name         String
+  username     String    @unique
+  passwordHash String
+  role         String
+  status       String
+  lastLoginAt  DateTime?
+  createdAt    DateTime  @default(now())
+
+  @@index([role, status])
+  @@index([status])
+}
+
+model Customer {
+  id        String   @id
+  name      String
+  phone     String   @unique
+  email     String   @default("")
+  createdAt DateTime @default(now())
+  notes     String   @default("")
+
+  @@index([name])
+  @@index([phone])
+}
+
+model Court {
+  id        String @id
+  name      String
+  type      String
+  openTime  String
+  closeTime String
+  status    String
+
+  @@index([status])
+}
+
+model PricingRule {
+  id          String  @id
+  courtId     String
+  dayOfWeek   String
+  startWindow String
+  endWindow   String
+  isPeak      Boolean @default(false)
+  hourlyRate  Float
+
+  @@index([courtId, dayOfWeek])
+}
+
+model Booking {
+  id            String   @id
+  customerId    String
+  customerName  String
+  customerPhone String
+  courtId       String
+  courtName     String
+  date          String
+  startTime     String
+  endTime       String
+  durationMins  Int
+  price         Float
+  amountPaid    Float
+  paymentStatus String
+  status        String
+  notes         String   @default("")
+  createdBy     String
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  @@index([date, courtId])
+  @@index([customerId])
+  @@index([createdBy])
+  @@index([status, paymentStatus])
+}
+
+model Setting {
+  key   String @id
+  value String
+}
+
+model AuditLog {
+  id         String   @id
+  actorId    String
+  actorName  String
+  action     String
+  entityType String
+  entityId   String
+  details    String   @default("")
+  timestamp  DateTime @default(now())
+
+  @@index([timestamp])
+  @@index([actorId])
+  @@index([entityType, entityId])
+}
