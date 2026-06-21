@@ -1,0 +1,104 @@
+@import url("https://api.fontshare.com/v2/css?f[]=clash-display@600,700&f[]=satoshi@400,500,700&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 210 40% 98%;
+    --foreground: 222 47% 11%;
+    --card: 0 0% 100%;
+    --card-foreground: 222 47% 11%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 47% 11%;
+    --brand: 142 71% 45%;
+    --brand-hover: 142 76% 36%;
+    --brand-foreground: 0 0% 100%;
+    --accent: 84 81% 44%;
+    --accent-foreground: 222 47% 11%;
+    --accent-lime: 84 81% 44%;
+    --muted: 210 40% 94%;
+    --muted-foreground: 215 16% 38%;
+    --destructive: 346 77% 49%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 214 32% 88%;
+    --input: 214 32% 88%;
+    --ring: 142 71% 45%;
+    --status-available: 210 40% 96%;
+    --status-booked: 142 71% 45%;
+    --status-pending: 38 92% 50%;
+    --status-completed: 221 83% 53%;
+    --status-cancelled: 346 77% 49%;
+    --status-blocked: 240 4% 46%;
+    color-scheme: light;
+  }
+
+  .dark {
+    --background: 222 47% 7%;
+    --foreground: 210 40% 96%;
+    --card: 222 47% 10%;
+    --card-foreground: 210 40% 96%;
+    --popover: 222 47% 10%;
+    --popover-foreground: 210 40% 96%;
+    --brand: 142 62% 38%;
+    --brand-hover: 142 55% 32%;
+    --brand-foreground: 144 72% 97%;
+    --accent: 83 70% 40%;
+    --accent-foreground: 210 40% 98%;
+    --accent-lime: 84 65% 48%;
+    --muted: 217 28% 17%;
+    --muted-foreground: 215 20% 72%;
+    --destructive: 346 65% 45%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 217 28% 20%;
+    --input: 217 28% 20%;
+    --ring: 142 62% 38%;
+    --status-available: 217 28% 16%;
+    --status-booked: 142 54% 34%;
+    --status-pending: 38 75% 42%;
+    --status-completed: 221 62% 45%;
+    --status-cancelled: 346 58% 42%;
+    --status-blocked: 240 5% 38%;
+    color-scheme: dark;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-feature-settings: "ss01" on, "cv01" on;
+  }
+
+  h1, h2, h3, h4 {
+    @apply font-display tracking-tight;
+  }
+
+  :focus-visible {
+    @apply outline-none ring-2 ring-ring ring-offset-2 ring-offset-background;
+  }
+}
+
+@layer utilities {
+  .tabular {
+    font-variant-numeric: tabular-nums;
+  }
+
+  .hatched {
+    background-image: repeating-linear-gradient(135deg, hsl(var(--status-blocked) / 0.22) 0 8px, transparent 8px 16px);
+  }
+
+  .pitch-header {
+    background-size: 28px 28px;
+    background-image:
+      radial-gradient(circle at center, hsl(var(--brand) / 0.16), transparent 28%),
+      linear-gradient(90deg, hsl(var(--border) / 0.55) 1px, transparent 1px),
+      linear-gradient(hsl(var(--border) / 0.55) 1px, transparent 1px);
+  }
+}
